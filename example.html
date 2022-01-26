@@ -1,0 +1,70 @@
+<head>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+  <!-- sweet alert라는 보기 좋은 ui의 알림창을 불러옵니다.-->
+</head>
+<body>
+  <a class="itcidersharesns" type="button" onclick="snsShare('title','url')" alt="itcider web share api" id ="itcidershared">
+    <img src="이미지 링크" width="40" alt="sns로 공유하기"></a>
+  <!-- web share api 불러오기 위한 클릭용 이미지-->
+
+<script>
+
+function snsShare(title, url){
+
+if(navigator.share){ /*web share api*/
+
+navigator.share({
+title: '	[##_article_rep_title_##]', /* 글 제목*/
+  text: '	[##_article_rep_desc_##]', /* 글 요약*/
+  url: '[##_article_rep_link_##]', /* 글의 url*/
+
+});
+$().ready(function () {
+            $("#itcidershared").click(function () {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'center-center',
+                    showConfirmButton: false,
+                    timer: 3000, /* 3초 동안 로드*/
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+
+                Toast.fire({
+                    icon: 'success',
+                    title: '공유 완료되었습니다' /*공유 성공시 나오는 말*/
+                })
+            });
+        });
+
+}else 
+
+$().ready(function () {
+            $("#itcidershared").click(function () {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'center-center',
+                    showConfirmButton: false,
+                    timer: 2500, /*2.5초 로드*/
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+
+                Toast.fire({
+                    icon: 'error',
+                    title: '미지원 브라우저' /*미지원 브라우저나 공유 실패*/
+                })
+            });
+        });
+
+
+}
+
+</script>
+</body>
